@@ -1,0 +1,27 @@
+<!-- action.component.html -->
+<!-- add-action-form.component.html -->
+<!-- action.component.html -->
+<!-- new-action.component.html -->
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><strong>Nom:</strong>{{ action.name }}</h5>
+      <p class="card-text"><strong>Objectif:</strong>{{ action.goal }}</p>
+      <p class="card-text"><strong>Responsable:</strong> {{ action.responsible}}</p>
+      <p class="card-text"><strong>Personnes touchées:</strong> {{ action.peopleAffected }}</p>
+      <p class="card-text"><strong>Date de création:</strong> {{ action.dateCreated | date }}</p>
+  
+      <!-- Add a success badge when the action is successful -->
+      <span *ngIf="action.successful" class="badge badge-success">Réussie</span>
+  
+      <button class="btn btn-danger" (click)="deleteAction()">Supprimer</button>
+  
+      <!-- Add a button to mark the action as successful -->
+      <button class="btn btn-success" (click)="markAsSuccessful()" [disabled]="action.successful">Marquer comme réussie</button>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+

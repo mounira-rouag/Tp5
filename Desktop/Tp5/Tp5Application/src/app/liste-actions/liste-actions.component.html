@@ -1,0 +1,12 @@
+<div class="container mt-4">
+    <h2>Liste des actions</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="list-group">
+          <app-action *ngFor="let action of actions" [action]="action" class="list-group-item"></app-action>
+        </div>
+      </div>
+    </div>
+    <a routerLink="/" class="btn btn-primary mt-3">Retour à l'accueil</a>
+  </div>
+  

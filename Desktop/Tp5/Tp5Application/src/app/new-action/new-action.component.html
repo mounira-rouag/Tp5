@@ -1,0 +1,45 @@
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div>
+    <h2>Nouvelle Action</h2>
+    <form [formGroup]="addActionForm" (ngSubmit)="onSubmitForm()" class="needs-validation" novalidate>
+      <div class="form-group">
+        <label for="name">Nom de l'action</label>
+        <input type="text" id="name" formControlName="name" class="form-control" required>
+        <!-- Add Bootstrap classes for styling and validation -->
+        <div class="invalid-feedback">Le nom de l'action est requis.</div>
+      </div>
+      <div class="form-group">
+        <label for="goal">Objectif</label>
+        <input type="text" id="goal" formControlName="goal" class="form-control" required>
+        <!-- Add Bootstrap classes for styling and validation -->
+        <div class="invalid-feedback">L'objectif est requis.</div>
+      </div>
+      <div class="form-group">
+        <label for="responsible">nom du Responsable</label>
+        <input type="text" id="responsible" formControlName="responsible" class="form-control" required>
+        <!-- Add Bootstrap classes for styling and validation -->
+        <div class="invalid-feedback">Le responsable est requis.</div>
+      </div>
+      <div class="form-group">
+        <label for="peopleAffected">Nombre de personnes bénéficiées</label>
+        <input type="number" id="peopleAffected" formControlName="peopleAffected" class="form-control" required>
+        <!-- Add Bootstrap classes for styling and validation -->
+        <div class="invalid-feedback">Le nombre de personnes bénéficiées est requis.</div>
+      </div>
+      <div class="form-group">
+        <label for="dateCreated">Date de création</label>
+        <input type="date" id="dateCreated" formControlName="dateCreated" class="form-control" required>
+        <!-- Add Bootstrap classes for styling and validation -->
+        <div class="invalid-feedback">La date de création est requise.</div>
+      </div>
+      <div class="action-buttons">
+        <button type="submit" class="btn btn-primary" >Soumettre</button>
+      </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
