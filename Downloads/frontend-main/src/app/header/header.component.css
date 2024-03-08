@@ -1,0 +1,15 @@
+.bg-black {
+    background-color: black ;
+  }
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto; /* Vertical centering */
+  }
+  
+  .logo-container img {
+    max-width: 200px;
+    max-height: 100px;
+    object-fit: cover;
+  }

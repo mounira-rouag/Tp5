@@ -1,0 +1,19 @@
+
+.contact_section {
+    padding: 50px 0; /* Adjust padding as needed */
+  }
+  
+  .contact-form {
+    border: 1px solid #ddd; /* Add a border for the form */
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Add rounded corners */
+  }
+  
+  .form-group {
+    margin-bottom: 15px; /* Adjust spacing between form groups */
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px; /* Adjust font size as needed */
+  }

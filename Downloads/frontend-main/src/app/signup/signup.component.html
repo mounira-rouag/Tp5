@@ -1,0 +1,68 @@
+<section class="contact_section layout_padding">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-8 mx-auto">
+              <div class="contact-form">
+                  <div class="heading_container">
+                      <h2>Sign Up</h2>
+                  </div>
+                  <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)" ng>
+                      <div class="form-group">
+                          <input type="text" name="firstname" placeholder="firstname" class="form-control" ngModel required />
+                          <div *ngIf="signUpForm.controls['firstname'].invalid && signUpForm.controls['firstname'].touched" class="error-message">firstname is required</div>
+                          
+                      </div>
+                      <div class="form-group">
+                          <input type="text" name="lastname" placeholder="lastname" class="form-control" ngModel required/>
+                          <div *ngIf="signUpForm.controls['lastname'].invalid && signUpForm.controls['lastname'].touched" class="error-message">lastname is required</div>
+                      </div>
+                      
+                      <div class="form-group">
+                          <input type="text" name="username" placeholder="Username" class="form-control" ngModel required/>
+                          <div *ngIf="signUpForm.controls['username'].invalid && signUpForm.controls['username'].touched" class="error-message">Username is required</div>
+                      </div>
+
+                      
+                      <div class="form-group">
+                          <input type="email" name="email" placeholder="Email" class="form-control" ngModel required />
+                          <div *ngIf="signUpForm.controls['email'].invalid && signUpForm.controls['email'].touched" class="error-message">email is required</div>
+                      </div>
+                      <div class="form-group">
+                          <input type="password" name="password" minlength="6" placeholder="Password" class="form-control" ngModel required />
+                          <div *ngIf="signUpForm.controls['password'].invalid && signUpForm.controls['password'].touched" class="error-message">password is required</div>
+                      </div>
+
+                      <div class="form-group">
+                          <select name="roles" class="form-control" [(ngModel)]="selectedRoles" multiple required>
+                              <option Value="" disabled selected> Choose a user</option>
+                              <option value="user">User</option>
+                              <option value="admin">Admin</option>
+                              <option value="mod">Rc</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <select name="siteid" class="form-control" ngModel required>
+                              <option Value="" disabled selected> Choose a site</option>
+                              <option value=1>site1</option>
+                              <option value=2>site2</option>
+                              <option value=3>site3</option>
+                          </select>
+                      </div>
+
+                      <div class="btn-box">
+                          <button type="submit" [disabled]="!signUpForm.valid">Sign Up</button>
+                      </div>
+                      
+                      <div *ngIf="signUpForm.submitted && isSignUpFailed" class="alert alert-danger alert-dismissed fade show" role="alert">
+                        Signup failed: {{ errorMessage }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      
+                  </form>
+                  
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
