@@ -1,0 +1,23 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+    height: 80%;
+  }
+
+  .custom-button .p-button-label {
+    color: white; /* Change text color */
+}
+
+.custom-button .p-button-icon {
+    color: green; /* Change icon color */
+}
+
+.custom-button {
+    background-color: blue; /* Change background color */
+    border-color: blue; /* Change border color */
+}

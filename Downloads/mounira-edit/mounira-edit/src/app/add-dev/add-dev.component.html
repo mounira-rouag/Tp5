@@ -1,0 +1,241 @@
+<div class="row g-0 ">
+    <div class="col-sm-6 col-md-8">
+
+        <div class="Cart">
+            <div class="column">
+                <div class="card flex justify-content-center">
+                    <p-fieldset legend="Developpment">
+
+                        <label for="username">Dev Name:</label>
+
+                        <label for="email">Version:</label>
+
+                        <label for="password">Dll:</label>
+                        <label for="username">Site:</label>
+                        <label for="username">Developor:</label>
+                        <label for="username">Type dev:</label>
+                        <label for="username">History:</label>
+                        <label for="username">Comment:</label>
+                        <label for="username">Bug:</label>
+
+                        <p-button (click)="showDialog()"  label="Update" style="color: #82c419"></p-button>
+                        <p-dialog [(visible)]="visible" [style]="{width: '50vw', 'box-shadow': '0px 2px 5px rgba(0, 0, 0, 0.3)'} ">
+                            <form #updateUserForm="ngForm" style="width: 100%;" novalidate>
+                                <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" id="devName" name="devName"  required>
+                                  <label for="devName">Dev Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" id="version" name="version" required>
+                                  <label for="version">Version</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" id="dll" name="dll" required>
+                                  <label for="dll">Dll</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <select class="form-select" id="site" name="site"  required>
+                                    <option value="1">Ardia</option>
+                                    <option value="2">Actia Do Brasil</option>
+                                    <option value="3">Actia Nordic</option>
+                                    <option value="4">Actia Automotive</option>
+                                    <option value="5">Actia CZ</option>
+                                    <option value="6">Invertix</option>
+                                    <option value="7">Actia Italia</option>
+                                    <option value="8">Actia China</option>
+                                  </select>
+                                  <label for="site">Site</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" id="developer" name="developer"  required>
+                                  <label for="developer">Developer</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" id="typeDev" name="typeDev"  required>
+                                  <label for="typeDev">Type Dev</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <textarea class="form-control" id="history" name="history"  required></textarea>
+                                  <label for="history">History</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <textarea class="form-control" id="comment" name="comment"  required></textarea>
+                                  <label for="comment">Comment</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                  <input type="text" class="form-control" id="bug" name="bug"  required>
+                                  <label for="bug">Bug</label>
+                                </div>
+                                <div class="btn-box">
+                                  <button type="submit" class="btn btn-success" >Update User</button>
+                                </div>
+                              </form>
+                              
+                        </p-dialog>
+
+
+                    </p-fieldset>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="column">
+            <div class="form-container">
+                <div class="Cart">
+                    <div class="column grid">
+                        <div class="card flex justify-content-center">
+                            <p-fieldset legend="Vehicules">
+                               
+                                
+                                
+        
+                            </p-fieldset>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row g-0 ">
+    <div class="col-sm-6 col-md-8">
+
+        <div class="Cart">
+            <div class="column">
+                <div class="card flex justify-content-center">
+                    <p-fieldset legend="cahier de charge ">
+                      
+                            <label for="username">Name</label>
+                            <label for="email">Reference Actia</label>
+                            <label for="password">Creation date</label>
+                            <label for="username"></label>
+                            <label for="username">Source</label>
+                            <label for="username">Index</label>
+                            <label for="username">Site</label>
+                           
+                    </p-fieldset>
+                    <div class="container text-center">
+                        <div  class="row">
+                            <input type="submit" value="Create">
+                        </div>
+                        <div  class="row">
+                            <input type="submit" value="delectionner">
+                        </div>
+                        <div  class="row">
+                            <input type="submit" value="consulter">
+                        </div>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="column">
+            <div class="form-container">
+                <div class="Cart">
+                    <div class="column">
+                        <div class="card flex justify-content-center">
+                            <p-fieldset legend="Menu">
+        
+                               
+                                <input type="submit" value="Create">
+        
+                            </p-fieldset>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row g-0 ">
+    <div class="col-sm-6 col-md-8">
+
+        <div class="Cart">
+            <div class="column">
+                <div class="card flex justify-content-center">
+                    <p-fieldset legend="Menu ">
+                      
+                            <label for="username">Menu Request</label>
+                            <label for="email">Ecu name</label>
+                            
+                           
+                    </p-fieldset>
+                    <div class="container text-center">
+                        <div  class="row">
+                            <input type="submit" value="Generate Menu">
+                        </div>
+                        <div  class="row">
+                            <input type="submit" value="Gereate Xml">
+                        </div>
+                        <div  class="row">
+                            <input type="submit" value="Update">
+                        </div>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="column">
+            <div class="form-container">
+                <div class="Cart">
+                    <div class="column">
+                        <div class="card flex justify-content-center">
+                            <p-fieldset legend="Vehicules">
+        
+                                <label for="username">Dev Name:</label>
+        
+                                <label for="email">Version:</label>
+        
+                                <label for="password">Dll:</label>
+                                <label for="username">Site:</label>
+                                <label for="username">Developor:</label>
+                                <label for="username">Type dev:</label>
+                                <label for="username">History:</label>
+                                <label for="username">Comment:</label>
+                                <label for="username">Bug:</label>
+        
+                                <input type="submit" value="Create">
+        
+                            </p-fieldset>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card">
+    <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="Available Vehicules " targetHeader="Selected" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ height: '30rem' }"
+    [targetStyle]="{ height: '30rem' }" filterBy="nomVeh" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name" breakpoint="1400px">
+    <ng-template let-Vehicule pTemplate="item">
+        <div class="flex flex-wrap p-2 align-items-center gap-3">
+            
+            <div class="flex-1 flex flex-column gap-2">
+                <span class="font-bold">{{ Vehicule.nomVeh }}</span>
+               
+            </div>
+            <div class="flex-1 flex flex-column gap-2">
+                <span class="font-bold">{{ Vehicule.marque.nomMarque }}</span>
+               
+            </div>
+
+        </div>
+    </ng-template>
+</p-pickList>
+</div>
+
+
