@@ -1,0 +1,180 @@
+<div class="row">
+
+    <div class="col form-container">
+        <form #updateUserForm="ngForm" style="max-width: 550px; margin-left: 50px ;margin-top: 20px;" novalidate>
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" id="nomCdc" [(ngModel)]="cdc.nomCdc" name="nomCdc" required>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Reference Ardia </mat-label>
+                        <input matInput type="text" id="refCdcArdia" [(ngModel)]="cdc.refCdcArdia" name="refCdcArdia"
+                            required>
+                    </mat-form-field>
+                </div>
+
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>References Actia</mat-label>
+                        <input matInput type="text" id="dev.cdc.refCdc" [(ngModel)]="cdc.refCdc" name="dev.cdc.refCdc"
+                            required>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Indice</mat-label>
+                        <input matInput type="text" id="indCdc" [(ngModel)]="cdc.indCdc" name="indCdc" required>
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="cdc.creation" name="creationDate">
+
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Site</mat-label>
+                        <mat-select name="site" [(ngModel)]="cdc.sites" id="site">
+                            <mat-option placeholder="" value="">site</mat-option>
+                            <mat-option *ngFor="let site of sites" [value]="site.idSite">{{site.nomSite}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label> Data Source</mat-label>
+                        <mat-select name="nomReverse" [(ngModel)]="cdc.reverse" id="">
+
+                            <mat-option *ngFor="let reverse of reverses"
+                                [value]="reverse.idReverse">{{reverse.nomReverse }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+
+
+
+        </form>
+    </div>
+    <div class="col form-container ">
+        <div style="margin-top: 20px"></div>
+        <p-pickList [source]="fonctionsByCdc" (onMoveToSource)="onMoveToSource($event)"
+            (onMoveToTarget)="onMoveToTarget($event)" [target]="allfonctions"
+            sourceHeader="Fonctions associated with CDC " targetHeader="All available fonctions " [dragdrop]="true"
+            [responsive]="true" [sourceStyle]="{ height: '22rem',width: '250px' }"
+            [targetStyle]="{ height: '23.5rem' , width: '250px'}" breakpoint="1000px">
+            <ng-template let-fonctionsByCdc pTemplate="item">
+                <div class="flex flex-wrap p-2 align-items-center gap-3">
+                    <div class="flex-1 flex flex-column gap-2">
+                        <span >{{ fonctionsByCdc.nomFonction }}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </p-pickList>
+    </div>
+    <br>
+    <br>
+   
+</div>
+<div class="button-container">
+
+    <button (click)="showDialog()" type="button" class="btn btn-search"
+    
+    icon="pi pi-check" label="Update Dev">Select Cdc</button>
+
+   
+    
+
+</div>
+
+
+<p-dialog header="Fonctions" [(visible)]="visible3"
+    [style]="{width: '50vw', 'box-shadow': '0px 2px 5px rgba(0, 0, 0, 0.3)'} ">
+    <ul>
+        <li *ngFor="let fonction of fonctionsByCdcId">{{fonction.nomFonction }}</li>
+    </ul>
+</p-dialog>
+
+
+<p-dialog header="" [(visible)]="visibleTable"
+    >
+    <p-table #dt [value]="allcdc" [rows]="5" [paginator]="true"
+    [globalFilterFields]="['idEcu', 'nomEcu', 'typeInj', 'nomfamille']" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} CDC" [showCurrentPageReport]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="idCdc">
+                Id<p-sortIcon field="idCdc"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nomCdc">Name <p-sortIcon field="nomCdc"></p-sortIcon></th>
+            <th pSortableColumn="refCdc" style="min-width:10rem">Reference <p-sortIcon
+                    field="refCdc"></p-sortIcon></th>
+            <th pSortableColumn="indCdc">Index <p-sortIcon field="indCdc">Index</p-sortIcon></th>
+            <th pSortableColumn="sites.nomSite">Site <p-sortIcon field="sites.nomSite">Site</p-sortIcon></th>
+            <th pSortableColumn="signatureOk">Signature <p-sortIcon field="signatureOk">Signature</p-sortIcon></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th> <p-columnFilter type="text" field="idCdc" ></p-columnFilter></th>
+            <th> <p-columnFilter type="text" field="nomCdc" ></p-columnFilter></th>
+            <th> <p-columnFilter type="text" field="indCdc" ></p-columnFilter></th>
+            
+            <th> <p-columnFilter type="text" field="sites.nomSite" ></p-columnFilter></th>
+            <th> <p-columnFilter type="text" field="signatureOk" ></p-columnFilter></th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-allcdc>
+        <tr>
+            <td>{{allcdc.idCdc}}</td>
+            <td>{{allcdc.nomCdc}}</td>
+            <td>{{allcdc.refCdc}}</td>
+            <td>{{allcdc.indCdc}}</td>
+            <td>{{allcdc?.sites?.nomSite}}</td>
+            <td>{{allcdc.signed}}</td>
+
+            <td>
+                <button type="button" pButton pRipple icon="pi pi-plus"
+                    class="p-button-rounded p-button-success mr-2" (click)="selectProduct(allcdc)"></button>
+
+                
+            </td>
+            <td>
+                <button type="button" pButton pRipple icon="pi pi-code"
+                    class="p-button-rounded p-button-success mr-2"
+                    (click)="showDialogfonction(allcdc.idCdc)"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">In total there are {{ allcdc ?
+            allcdc.length : 0 }} CDC.</div>
+    </ng-template>
+</p-table>
+</p-dialog>
+

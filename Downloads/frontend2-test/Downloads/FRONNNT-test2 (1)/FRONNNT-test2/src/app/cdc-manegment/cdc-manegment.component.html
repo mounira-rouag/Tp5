@@ -1,0 +1,94 @@
+<div class="row justify-content-center" style="margin-top: 15px;">
+    <div class="col-md-3">
+        <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label> Search By Version</mat-label>
+            <mat-select name="receiveData.maj" id="nomMaj" [(ngModel)]="selectedVersion" >
+                <mat-option *ngFor="let maj of majs" [value]="maj">{{maj.nomMaj}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-2 text-center">
+        <div class="hstack gap-3">
+            <button class="btn-search" (click)="searchCDCByFilters()">SEARCH</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <div class="form-controle">
+            <p-toast></p-toast>
+            <p-table styleClass="p-datatable-sm" #dt [value]="allcdc" [rows]="5" [paginator]="true" editMode="row"
+                [globalFilterFields]="['idEcu', 'nomEcu', 'typeInj', 'nomfamille']" [rowHover]="true" dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} CDC"
+                [showCurrentPageReport]="true" [loading]="loading">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="idCdc">
+                            Id<p-sortIcon field="idCdc"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="nomCdc">Name <p-sortIcon field="nomCdc"></p-sortIcon></th>
+                        <th pSortableColumn="refCdc" style="min-width:10rem">Reference <p-sortIcon
+                                field="refCdc"></p-sortIcon></th>
+                        <th pSortableColumn="indCdc">Index <p-sortIcon field="indCdc">Index</p-sortIcon></th>
+                        <th pSortableColumn="sites.nomSite">Site <p-sortIcon field="sites.nomSite">Site</p-sortIcon>
+                        </th>
+                        <th pSortableColumn="signatureOk">Signature </th>
+
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th> <p-columnFilter type="text" field="idCdc"></p-columnFilter></th>
+                        <th> <p-columnFilter type="text" field="nomCdc"></p-columnFilter></th>
+                        <th> <p-columnFilter type="text" field="refCdc"></p-columnFilter></th>
+
+                        <th> <p-columnFilter type="text" field="Index"></p-columnFilter></th>
+                        <th>
+                            <p-columnFilter type="text" field="sites.nomSite"></p-columnFilter>
+                        </th>
+                        <th><p-columnFilter type="boolean" field="signatureOk"></p-columnFilter></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-allcdc let-editing="editing" let-ri="rowIndex">
+                    <tr>
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">{{allcdc.idCdc ?? '__'}}
+
+                        </td>
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">{{allcdc.nomCdc ?? '__'}}</td>
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">{{allcdc.refCdc ?? '__'}}</td>
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">{{allcdc.indCdc ?? '__'}}</td>
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">{{allcdc?.sites?.nomSite ?? '__'}}</td>
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">{{allcdc.signed ?? '__'}}</td>
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">
+                            <button (click)="toggleSigned(allcdc)" class="btn btn-search2"
+                                [ngStyle]="{ 'background-color': allcdc.signed === 'Signed' ? '#82c419' : '#DC3545' }">
+                                <i class="pi  "
+                                    [ngClass]="{ 'pi-times': allcdc.signed === 'Signed', 'pi-check': allcdc.signed !== 'Signed' }"
+                                    [ngStyle]="{ 'color': allcdc.signed === 'Signed' ? 'white' : 'black' }">
+                                </i>
+                            </button>
+
+
+
+                        </td>
+
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">
+                        </td>
+                        <td [ngClass]="{'unsigned-row': !allcdc.signatureOk}">
+                        </td>
+                        
+                    </tr>
+                </ng-template>
+            
+            </p-table>
+        </div>
+    </div>
+
+</div>

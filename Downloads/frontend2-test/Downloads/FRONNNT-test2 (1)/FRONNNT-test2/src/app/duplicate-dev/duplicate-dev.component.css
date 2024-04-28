@@ -1,0 +1,86 @@
+.example-container .mat-form-field + .mat-form-field {
+}
+
+legend {
+   
+    color: #57625a;
+    padding: 3px 6px;
+  }
+  
+  input {
+    margin: 0.4rem;
+  }
+ .card{
+margin-left: 20px;
+ margin-top: 100px;
+ margin-right: 20px;
+ margin-top: 20px;
+ height: 550px;
+ box-shadow: 0.5px 0.5px 4px rgb(197, 191, 191);
+ }
+  .example-container fieldset {
+    border: 2px solid black; /* Set border width and color */
+    border-radius: 5px; /* Optional: Add rounded corners */
+  }
+  
+
+
+  .flex-container {
+    display: flex;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.radio-label {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+.custom-margin-top {
+    margin-top: 5px;
+}
+
+.flex-container .row .col {
+  margin-right: 15px;
+}
+
+.flex-container .row .col:last-child {
+  margin-right: 0;
+}
+
+
+
+.button-container button {
+  position: absolute;
+  right: 25px; 
+  bottom: 40px; 
+  width: 150px;
+  height: 50px;
+}
+ 
+
+
+
+  .example-form {
+    min-width: 120px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+ width: 220px;
+
+  }
+
+

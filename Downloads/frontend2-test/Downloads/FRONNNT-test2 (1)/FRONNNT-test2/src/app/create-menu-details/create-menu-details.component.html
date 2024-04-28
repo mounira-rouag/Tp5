@@ -1,0 +1,172 @@
+<div class=" card2  row" style=" margin-left: 10px;">
+    <div class="col-md-9">
+        <form #updateUserForm="ngForm" style="margin-right: 5px; margin-left: 150px; margin-top: 50px; width: 1500px;" novalidate>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>URL</mat-label>
+                                <input matInput type="url" id="pathMenu" [(ngModel)]="menu.pathMenu" name="pathMenu" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn" (click)="inputFile.click()"
+                                style="background-color: #82c419; border-color: #82c419; color: white; height: 55px;">Select file</button>
+                            <div class="file-input">
+                                <input type="file" hidden #inputFile accept=".pdf, .doc, .docx">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Ecu Name</mat-label>
+                        <input matInput type="url" id="nomEcu" [(ngModel)]="ecu.nomEcu" name="nomEcu" required>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn"
+                        style="background-color: #82c419; border-color: #82c419; color: white; height: 52px;width:150px ">Generate Menu</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Principale  message</mat-label>
+                        <input matInput type="text" id="message1" [(ngModel)]="menu.MessageInit" name="message1">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Message before initialisation</mat-label>
+                        <input matInput type="text" id="message2"  [(ngModel)]="menu.MessagePrinc" name="message2">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn"
+                        style="background-color: #82c419; border-color: #82c419; color: white; height: 52px;width:150px">Generate XML</button>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+   
+
+</div>
+
+<div class="row">
+    <div class="col form-container" >
+        <p class="title" style="margin-left: 15px;margin-top: 5px;">Calculators list</p>
+            
+            <p-table #dt [value]="AllEcu" [rows]="4" [paginator]="true" styleClass="p-datatable-sm"
+                [globalFilterFields]="['idEcu', 'nomEcu', 'typeInj', 'nomfamille']" [rowHover]="true"
+                dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Ecu"
+                [showCurrentPageReport]="true">
+
+                <ng-template pTemplate="header">
+                    <tr>
+
+                        <th pSortableColumn="idEcu">
+                            Id<p-sortIcon field="idEcu"></p-sortIcon>
+                        </th>
+
+                        <th pSortableColumn="famille.nomfamille">Familly <p-sortIcon
+                                field="famille.nomfamille"></p-sortIcon></th>
+                        <th pSortableColumn="nomEcu" style="min-width:10rem">Name <p-sortIcon
+                                field="nomEcu"></p-sortIcon></th>
+                        <th pSortableColumn="typeInj">Type <p-sortIcon field="typeInj">Type</p-sortIcon></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th>  <p-columnFilter type="text" field="idEcu" ></p-columnFilter></th>
+                        <th>  <p-columnFilter type="text" field="famille.nomfamille" ></p-columnFilter></th>
+                        <th>  <p-columnFilter type="text" field="nomEcu" ></p-columnFilter></th>
+                        <th>  <p-columnFilter type="text" field="typeInj" ></p-columnFilter></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-allecu>
+                    <tr>
+                        <td>
+                            {{ allecu.idEcu ?? '__' }}
+                        </td>
+                        <td>
+                            {{ allecu.famille.nomfamille ?? '__'}}
+                        </td>
+                        <td>
+                            {{ allecu.nomEcu ?? '__'}}
+                        </td>
+                        <td>{{ allecu.typeInj ?? '__'}}</td>
+
+
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-plus"
+                                style="background-color: #82c419; border-color: #82c419; "
+                                class="p-button-rounded  mr-2" (click)="updateEcu(allecu)"></button>
+
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+
+       
+    </div>
+    <div class="col-md-4  form-container" >
+        <p class="titleCrete" style="margin-left: 130px;margin-top: 5px;">Add a new Calculator</p>
+            <div class="d-flex justify-content-center align-items-center" style="margin-top: 30px;">
+               
+                    <form #CreatEcu="ngForm" class="m-4">
+                        <!-- Scroller list -->
+                        <div class="mb-3">
+                            <mat-form-field appearance="fill" class="example-full-width"
+                                [style]="{'width': '300px'}">
+                                <mat-label>Choose a Family</mat-label>
+                                <mat-select name="family" [(ngModel)]="selectFamily" id="family"  (ngModelChange)="onFamilySelected($event)"  required>
+                                    <mat-option *ngFor="let family of AllFamily"
+                                        [value]="family">{{family.nomfamille}}-{{family.descrAnglais}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- Injection Type input -->
+                        <div class="mb-3">
+                            <mat-form-field appearance="fill" class="example-full-width"
+                                [style]="{'width': '300px'}">
+                                <mat-label>Inj Type</mat-label>
+                                <mat-select name="username" [(ngModel)]="ecu.typeInj" [disabled]="!enable" id="">
+
+                                    <mat-option *ngFor="let types of allecuTypes"
+                                        [value]="types">{{types}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ECU Name input -->
+                        <div class="mb-3">
+                            <mat-form-field appearance="fill" class="example-full-width"
+                                [style]="{'width': '300px'}">
+                                <mat-label>ECU Name</mat-label>
+                                <input matInput type="text" name="nomEcu" [(ngModel)]="ecu.nomEcu" required>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- Submit button -->
+                      
+
+                        <div class=" g-3  d-flex justify-content-center" >
+                            <p-toast></p-toast>
+                            <p-confirmPopup></p-confirmPopup>
+                            <button (click)="confirm3($event)" type="button" class="btn btn-search"
+                              
+                                label="Update Dev">CREATE</button>
+                        </div>
+                    </form>
+                
+            </div>
+    </div>
+    <div></div>
+</div>

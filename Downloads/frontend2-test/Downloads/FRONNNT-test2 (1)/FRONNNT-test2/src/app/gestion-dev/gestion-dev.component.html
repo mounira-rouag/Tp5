@@ -1,0 +1,280 @@
+<div class="search-container">
+  <div class="container">
+    <div class="row-container">
+      <div class="s009">
+        <form>
+          <div class="inner-form">
+            <div class="advance-search row justify-content-start ">
+              <h2>Search</h2>
+              <div class="row">
+                <div class="col-md-6">
+                  
+                  <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Marque</mat-label>
+                    <mat-select name="choices-single-defaul1" id="idmarque" [(ngModel)]="selectedMarque" 
+                    (ngModelChange)="onMarqueChange($event)" >
+
+                        <mat-option *ngFor="let marque of marques" [value]="marque">{{ marque }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                 
+                    <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Version</mat-label>
+                    <mat-select name="choices-single-defaul1" id="idmarque" [(ngModel)]="selectedmaj" 
+                     >
+
+                        <mat-option *ngFor="let maj of majs" [value]="maj.idMaj">{{maj.nomMaj}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                 
+                  <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Sites</mat-label>
+                    <mat-select name="choices-single-defaul4"  [(ngModel)]="selectedSite" 
+                     >
+
+                        <mat-option *ngFor="let site of sites" [value]="site.idSite">{{site.nomSite }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                
+
+                  <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Model</mat-label>
+                    <mat-select name="choices-single-defaul6"  [(ngModel)]="selectemodel" 
+                     >
+
+                        <mat-option *ngFor="let Veh of Vehicules1" [value]="Veh.codeVeh">{{Veh. nomVeh}} [{{Veh.nominterne}}]</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row ">
+                <div class="input-field">
+
+                  <div class="hstack gap-3">
+                    <button class="btn-search " id="delete" (click)="reset()">RESET</button>
+                    <button class="btn-search" (click)="searchDevsByFilters()">SEARCH</button>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class=" conatiner">
+    <div class="input-field">
+      <div class="container text-center">
+        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+          <div class="col">
+            <div class="p-3">
+
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3">
+            </div>
+          </div>
+          <div class="col">
+            <div class="p-3">
+            </div>
+          </div>
+
+          <div class="input-field">
+            <div class="p-3">
+              <button class=" btn btn-search" *ngIf="showAdminBoard || showRSBoard || showRSPouvoirBoard"
+                routerLink="/create-dev">
+
+                <i class="pi pi-plus"> </i> ADD
+
+              </button>
+
+            </div>
+          </div>
+          <div class="input-field">
+
+            <div class="p-3">
+              <div class="dropdown">
+                <button class="btn btn-search dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  EXPORT
+                </button>
+                <div class="dropdown-menu" aria-labelledby="exportDropdown">
+                  <a class="dropdown-item" href="#" (click)="exportPersonalisedToExcel()">Personalised Export</a>
+                  <a class="dropdown-item" href="#" (click)="exportStanderToExcel()">Standard Export</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <p-table #dt1 styleClass="p-datatable-sm" [value]="alldev" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Developpments"
+      [globalFilterFields]="['id' , 'devname' ,'etatdev.nomEtatDev','refcdc','Cdcname', 'dll','famille','nomEcu','Bug','Developer','Jira']"
+      [tableStyle]="{ 'min-width': '150rem' }" selectionMode="single" [(selection)]="selectedProducts"
+      [loading]="loading">
+
+    
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">
+            Id<p-sortIcon field="id"></p-sortIcon>
+          </th>
+
+
+
+          <th pSortableColumn="id">
+            Dev-Name<p-sortIcon field="devname"></p-sortIcon>
+          </th>
+          <th pSortableColumn="etatdev.nomEtatDev">
+            Dev-Status<p-sortIcon field="etatdev.nomEtatDev"></p-sortIcon>
+          </th>
+          <th pSortableColumn="cdc.refCdc">
+            CDC-Ref<p-sortIcon field="cdc.refCdc"></p-sortIcon>
+          </th>
+          <th pSortableColumn="cdc.nomCdc">
+            CDC-Name<p-sortIcon field="cdc.nomCdc"></p-sortIcon>
+          </th>
+          <th pSortableColumn="dll">
+            Dll<p-sortIcon field="dll"></p-sortIcon>
+          </th>
+          <th pSortableColumn="ecu.famille.nomfamille">
+            Family-Name<p-sortIcon field="ecu.famille.nomfamille"></p-sortIcon>
+          </th>
+          <th pSortableColumn="nomEcu">
+            ECU-Name<p-sortIcon field="nomEcu"></p-sortIcon>
+          </th>
+          <th pSortableColumn="Bug">
+            Bug<p-sortIcon field="Bug"></p-sortIcon>
+          </th>
+          <th pSortableColumn="user.username">
+            Developer<p-sortIcon field="user.username"></p-sortIcon>
+          </th>
+          <th pSortableColumn="jira">
+            Jira<p-sortIcon field="jira"></p-sortIcon>
+          </th>
+          <th>
+            <div class="flex align-items-center">
+
+
+            </div>
+          </th>
+          <th>
+            <div class="flex align-items-center">
+
+
+            </div>
+          </th>
+          <th>
+            <div class="flex align-items-center">
+
+
+            </div>
+          </th>
+          <th>
+            <div class="flex align-items-center">
+
+
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th> <p-columnFilter type="text" field="id"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="devname"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="etatdev.nomEtatDev"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="cdc.refCdc"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="cdc.nomCdc"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="dll"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="ecu.famille.nomfamille"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="nomEcu"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="Bug"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="user.username"></p-columnFilter></th>
+          <th> <p-columnFilter type="text" field="jira"></p-columnFilter></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-alldev>
+        <tr>
+          <td>
+            {{ alldev?.id ?? '__'}}
+          </td>
+          <td>
+            {{ alldev?.devname ?? '__'}}
+          </td>
+          <td>
+            {{ alldev?.etatdev?.nomEtatDev ?? '__'}}
+          </td>
+          <td>
+            {{ alldev.cdc?.refCdc ?? '__'}}
+          </td>
+          <td>
+            {{ alldev.cdc?.nomCdc ?? '__'}}
+          </td>
+          <td>
+            {{ alldev?.dll ?? '__'}}
+          </td>
+          <td>
+            {{ alldev?.ecu?.famille?.nomfamille ?? '__'}}
+          </td>
+          <td>
+            {{ alldev?.ecu?.nomEcu ?? '__'}}
+          </td>
+          <td>
+            {{ alldev?.numBug ?? '__'}}
+          </td>
+          <td>
+            {{ alldev?.user?.username ?? '__'}}
+          </td>
+          <a [href]="alldev.Jira" target="_blank">{{alldev.jira ?? '__'}}</a>
+          <td>
+            <button type="button" class="btn btn-light " (click)="showDialog(alldev.id)"><i class="pi pi-car"
+                style="font-size: 1rem"></i></button>
+            <p-dialog header="Vehicules" [(visible)]="visible"
+              [style]="{width: '50vw', 'box-shadow': '0px 2px 5px rgba(0, 0, 0, 0.3)'} "
+              [styleClass]="customDialogClass">
+              <ul>
+                <li *ngFor="let vehicle of Vehicules">{{vehicle.nomVeh }}</li>
+              </ul>
+            </p-dialog>
+          </td>
+          <td>
+            <button type="button" class="btn btn-light" (click)="duplicate(alldev)"> <i class="pi pi-copy"
+              style="font-size: 1rem"></i></button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-light" (click)="editDev(alldev)"> <i class="pi pi-pencil"
+                style="font-size: 1rem"></i></button>
+          </td>
+
+
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
+  <br>
+
+</div>

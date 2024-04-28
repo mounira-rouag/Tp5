@@ -1,0 +1,658 @@
+<mat-tab-group color="accent" animationDuration="200ms" >
+    <mat-tab label="Developpment" style="background-color: rgb(70, 64, 64)">
+        <div class="row">
+            <div class="col form-container">
+                <form (ngSubmit)="onSubmit()" style="max-width: 600px; margin: 20px 12px;margin-left: 50px;" novalidate
+                    [ngStyle]="{backgroundColor: 'var(--highlight-bg)'}">
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Dev Name</mat-label>
+                                <input matInput type="text" id="devname" [(ngModel)]="dev.devname" name="devname" [disabled]="!isModificationAllowed">
+                            </mat-form-field>
+                        </div>
+
+
+
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Version</mat-label>
+                                <mat-select name="nomMaj" [(ngModel)]="dev.maj.idMaj" id="nomMaj" [disabled]="!isModificationAllowed" (ngModelChange)="onVersion($event)">
+
+                                    <mat-option *ngFor="let maj of majs" [value]="maj.idMaj" >{{maj.nomMaj}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Dll</mat-label>
+                                <input matInput type="text" [(ngModel)]="dev.dll" id="dll" name="dll" [disabled]="!isModificationAllowed">
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Site</mat-label>
+                                <mat-select name="dev.user.site" [(ngModel)]="dev.sites.idSite" id="" [disabled]="!isModificationAllowed">
+                                    <mat-option placeholder="" value=""  >Site</mat-option>
+                                    <mat-option *ngFor="let site of sites"
+                                        [value]="site.idSite">{{site.nomSite}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Developer</mat-label>
+                                <mat-select name="username" [(ngModel)]="dev.user.id" id="" [disabled]="!isModificationAllowed">
+
+                                    <mat-option *ngFor="let User of allUsers"
+                                        [value]="User.id">{{User.username}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Etat-Dev</mat-label>
+                                <mat-select name="IdEtatDev" [(ngModel)]="dev.etatdev.nomEtatDev" id="" [disabled]="!isModificationAllowed" (ngModelChange)="onVersion($event)">
+
+                                    <mat-option *ngFor="let etat of allEtatDev"
+                                        [value]="etat.nomEtatDev">{{etat.nomEtatDev}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>bug</mat-label>
+                                <input matInput type="text" id="numbeg" name="numbeg" [(ngModel)]="dev.numBug" [disabled]="!isModificationAllowed">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>History</mat-label>
+                                <input matInput type="text" id="history" name="history" [disabled] [disabled]="!isModificationAllowed"
+                                       [ngClass]="{ 'dev-duplicated': dev.etatdev.nomEtatDev === 'Dupliqué' }"
+                                       [value]="dev.etatdev.nomEtatDev === 'Dupliqué' ? 'Dev is duplicated' : ''"
+                                       readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Comment</mat-label>
+                                <input matInput type="text" id="comment" name="devcomment" [(ngModel)]="dev.devComment" [disabled]="!isModificationAllowed">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+
+                </form>
+            </div>
+            <div class=" col form-container">
+                <div style="margin-top: 25px;"></div>
+                <p-pickList [disabled]="!isModificationAllowed" [source]="fonctionByDev" [target]="fonctionsByCdc" sourceHeader="Fonctions with dev "
+                    targetHeader="Available fonctions (in CDC)" [dragdrop]="true" [responsive]="true"
+                    [sourceStyle]="{ height: '20rem' }" [targetStyle]="{ height: '20rem' }" breakpoint="1400px">
+                    <ng-template let-fonctionsBydev pTemplate="item">
+                        <div class="flex flex-wrap p-2 align-items-center gap-3">
+
+                            <div class="flex-1 flex flex-column gap-2">
+                                <span >{{ fonctionsBydev.descrAnglais }}</span>
+
+                            </div>
+
+                        </div>
+                    </ng-template>
+                </p-pickList>
+
+            </div>
+
+        </div>
+
+        <div class="row" style="margin-top: 50px;">
+            
+            <div class=" col form-container">
+                <p class="title" style="margin-left: 15px;margin-top: 5px;">Validations list</p>
+                <p-table [value]="validations" [tableStyle]="{ 'min-width': '20rem'}" >
+                    <p>Liste of validations</p>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>State</th>
+                            <th>Version</th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-validation>
+                        <tr>
+                            <td>{{ validation.dateValid }}</td>
+                            <td>{{ validation.name }}</td>
+                            <td>{{ validation.etatValid }}</td>
+                            <td>{{ validation.versionName }}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger"
+                                    (click)="onDeleteValidation(dev.id, validation.idValid)" [disabled]="!isModificationAllowed"> <i class="pi pi-trash"></i></button>
+                            </td>
+                        </tr>
+
+                    </ng-template>
+                </p-table>
+
+            </div>
+
+            <div class=" col form-container">
+                <p class="titleCrete" style="margin-left: 50px;margin-top: 5px;">Add new Validation</p>
+                <form (ngSubmit)="onSubmit()" style="max-width: 600px; margin: 40px 12px;margin-left: 50px;" novalidate
+                    [ngStyle]="{backgroundColor: 'var(--highlight-bg)'}">
+                    <div class="row g-3">
+
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker" [disabled]="!isModificationAllowed" [(ngModel)]="validationCreate.dateValid"
+                                name="dateValid">
+
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Type</mat-label>
+                                <mat-select name="typeValid" [disabled]="!isModificationAllowed" [(ngModel)]="validationCreate.typeValid" id="typeValid "
+                                    (change)="onListTypeChange()">
+
+                                    <mat-option value="GT">Test Unitaire</mat-option>
+                                    <mat-option value="Véhicule">Test Integration</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>State</mat-label>
+                                <mat-select name="etatValid"  [disabled]="!isModificationAllowed" [(ngModel)]="validationCreate.etatValid" id="">
+                                    <mat-option placeholder="" value="">State</mat-option>
+                                    <mat-option value="correct">Correct </mat-option>
+                                    <mat-option value="Incorrect">Incorrect</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Sub Versions</mat-label>
+                                <mat-select name="selectedIdVer" [disabled]="!isModificationAllowed" [(ngModel)]="validationCreate.idVer" id="">
+                                    <mat-option placeholder="" value="">Subversions</mat-option>
+                                    <mat-option *ngFor="let availableSubversion of availableSubversions"
+                                        [value]="availableSubversion.idVer">{{availableSubversion.nomVer}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+                    <div class=" g-3"
+                        style=" width: 150px;margin-left: 200px; border-radius: 20px;margin-top: 50px;">
+                        <p-toast></p-toast>
+                        <p-confirmPopup></p-confirmPopup>
+                        <button [disabled]="!isModificationAllowed" (click)="confirm2($event)" type="button" class="btn btn-search" 
+                            icon="pi pi-check" label="Update Dev">CREATE</button>
+                    </div>
+            
+        
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div style="margin-top: 20px; margin-left: 20px;margin-bottom: 10px;">
+            <div class="g-3">
+                <p-toast></p-toast>
+                <p-confirmPopup></p-confirmPopup>
+                <button (click)="confirm1($event)" type="button" class="btn btn-search "
+               
+                    icon="pi pi-check" label="Update Dev" [disabled]="!isModificationAllowed">UPDATE</button>
+
+                   
+            </div>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="Vehicules">
+        <div class="card d-flex justify-content-center">
+            <div style="margin-top: 20px;"></div>
+            <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="All Vehicules  " [disabled]="!isModificationAllowed"
+                targetHeader="Vehicules With Dev " [dragdrop]="true" [responsive]="true"
+                [sourceStyle]="{width:'5rm' ,height: '20rem' }" [targetStyle]="{width:'5rm', height: '20rem' }"
+                filterBy="nomVeh" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name"
+                breakpoint="1400px" class="custom-picklist">
+                <ng-template let-sourceProducts pTemplate="item">
+                    <div class="flex flex-wrap p-2 align-items-center gap-3">
+
+                        <div class="flex-1 flex flex-column gap-2">
+                            <span >{{ sourceProducts?.nomVeh }}</span>
+
+                        </div>
+                        <div class="flex-1 flex flex-column gap-2">
+                            <span >{{ sourceProducts?.marque?.nomMarque }}</span>
+
+                        </div>
+
+                    </div>
+                </ng-template>
+
+
+            </p-pickList>
+            <div style="margin-top: 20px;"></div>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="CDC">
+        <div class="row">
+            <div class="col form-container" >
+                <form #updateUserForm="ngForm" style="margin-right: 50px; margin-left: 50px ;margin-top: 20px;" 
+                    novalidate>
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Name</mat-label>
+                                <input matInput type="text" id="nomCdc" [(ngModel)]="dev.cdc.nomCdc" name="nomCdc"
+                                    required [disabled]="!isModificationAllowed">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Reference Ardia </mat-label>
+                                <input matInput type="text" id="refCdcArdia" [(ngModel)]="dev.cdc.refCdcArdia"
+                                    name="refCdcArdia" required [disabled]="!isModificationAllowed">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>References Actia</mat-label>
+                                <input matInput type="text" id="dev.cdc.refCdc" [(ngModel)]="dev.cdc.refCdc"
+                                    name="dev.cdc.refCdc" required [disabled]="!isModificationAllowed">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Indice</mat-label>
+                                <input matInput type="text" id="indCdc" [(ngModel)]="dev.cdc.indCdc" name="indCdc"
+                                    required [disabled]="!isModificationAllowed">
+                            </mat-form-field>
+                        </div>
+
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker1" [(ngModel)]="dev.cdc.creation" name="creationDate2" [disabled]="!isModificationAllowed">
+
+                            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Site</mat-label>
+                                <mat-select name="site" [(ngModel)]="dev.cdc.sites.idSite" id="site" [disabled]="!isModificationAllowed">
+                                    <mat-option placeholder="" value=""  >site</mat-option >
+                                    <mat-option *ngFor="let site of sites"
+                                        [value]="site.idSite"  >{{site.nomSite}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label> Data Source</mat-label>
+                                <mat-select name="nomReverse" [(ngModel)]="dev.cdc.reverse.nomReverse" id="" [disabled]="!isModificationAllowed">
+
+                                    <mat-option *ngFor="let reverse of reverses"
+                                        [value]="reverse.nomReverse">{{reverse.nomReverse }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="col form-container1 ">
+               <div style="margin-top: 15px;"></div>
+                <p-pickList [disabled]="!isModificationAllowed" [source]="fonctionsByCdc1" [target]="allfonctions" (onMoveToTarget)="onItemMove($event)"
+                    sourceHeader="Fonctions with CDC" targetHeader="All available fonctions " [dragdrop]="true"
+                    [responsive]="true" [sourceStyle]="{ height: '25rem'  , width: '257px'}" [targetStyle]="{ height: '25rem' , width: '257px' }"
+                    breakpoint="1400px">
+                    <ng-template let-fonctionsByCdc1 pTemplate="item">
+                        <div class="flex flex-wrap p-2 align-items-center gap-3">
+                            <div class="flex-1 flex flex-column gap-2">
+                                <span >{{ fonctionsByCdc1.nomFonction }}</span>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-pickList>
+
+
+
+
+            </div>
+        </div>
+       <div></div>
+        <div class="button-container" >
+
+            <button (click)="showDialog()" type="button" class="btn btn-search"
+           
+            icon="pi pi-check" label="Update Dev" [disabled]="!isModificationAllowed">Select CDC</button>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Menu">
+        <div class=" card2  row" style=" margin-left: 10px;">
+            <div class="col-md-9">
+                <form #updateUserForm="ngForm" style="margin-right: 5px; margin-left: 150px; margin-top: 50px; width: 1500px;" novalidate>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>URL</mat-label>
+                                        <input matInput type="url" id="pathMenu" [disabled]="!isModificationAllowed" [(ngModel)]="dev.menu.pathMenu" name="pathMenu" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn" (click)="inputFile.click()" [disabled]="!isModificationAllowed"
+                                        style="background-color: #82c419; border-color: #82c419; color: white; height: 55px;">Select file</button>
+                                    <div class="file-input">
+                                        <input type="file" hidden #inputFile accept=".pdf, .doc, .docx">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Ecu Name</mat-label>
+                                <input matInput type="url" id="nomEcu" [disabled]="!isModificationAllowed" [(ngModel)]="dev.ecu.nomEcu" name="nomEcu" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn" [disabled]="!isModificationAllowed"
+                                style="background-color: #82c419; border-color: #82c419; color: white; height: 52px;width:150px ">Generate Menu</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Principale  message</mat-label>
+                                <input matInput type="text" id="message1" [disabled]="!isModificationAllowed" [(ngModel)]="dev.menu.codeMessageInit" name="message1">
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Message before initialisation</mat-label>
+                                <input matInput type="text" id="message2" [disabled]="!isModificationAllowed" [(ngModel)]="dev.menu.codeMessagePrinc
+                                " name="message2">
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn" [disabled]="!isModificationAllowed"
+                                style="background-color: #82c419; border-color: #82c419; color: white; height: 52px; width:150px">Generate XML</button>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+           
+        
+        </div>
+        
+        <div class="row">
+            <div class="col form-container" >
+           
+                <p class="title" styleClass="p-datatable-sm" style="margin-left: 15px;margin-top: 5px;">Calculators list</p>
+                    <p-table #dt [value]="AllEcu" [rows]="4" [paginator]="true" styleClass="p-datatable-sm"
+                        [globalFilterFields]="['idEcu', 'nomEcu', 'typeInj', 'nomfamille']" [rowHover]="true"
+                        dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Ecu"
+                        [showCurrentPageReport]="true">
+        
+                        <ng-template pTemplate="header">
+                            <tr>
+        
+                                <th pSortableColumn="idEcu">
+                                    Id<p-sortIcon field="idEcu"></p-sortIcon>
+                                </th>
+        
+                                <th pSortableColumn="famille.nomfamille">Familly <p-sortIcon
+                                        field="famille.nomfamille"></p-sortIcon></th>
+                                <th pSortableColumn="nomEcu" style="min-width:10rem"> Name <p-sortIcon
+                                        field="nomEcu"></p-sortIcon></th>
+                                <th pSortableColumn="typeInj">Type <p-sortIcon field="typeInj">Type</p-sortIcon></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th>  <p-columnFilter type="text" field="idEcu" ></p-columnFilter></th>
+                                <th>  <p-columnFilter type="text" field="famille.nomfamille" ></p-columnFilter></th>
+                                <th>  <p-columnFilter type="text" field="nomEcu" ></p-columnFilter></th>
+                                <th>  <p-columnFilter type="text" field="typeInj" ></p-columnFilter></th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-allecu>
+                            <tr>
+                                <td>
+                                    {{ allecu.idEcu ?? '__' }}
+                                </td>
+                                <td>
+                                    {{ allecu.famille.nomfamille ?? '__'}}
+                                </td>
+                                <td>
+                                    {{ allecu.nomEcu ?? '__'}}
+                                </td>
+                                <td>{{ allecu.typeInj ?? '__'}}</td>
+        
+        
+        
+        
+                                <td>
+                                    <button pButton pRipple icon="pi pi-plus"
+                                        style="background-color: #82c419; border-color: #82c419; "
+                                        class="p-button-rounded  mr-2" [disabled]="!isModificationAllowed" (click)="updateEcu(allecu)"></button>
+        
+                                </td>
+                            </tr>
+                        </ng-template>
+        
+                    </p-table>
+        
+               
+            </div>
+            <div class="col-md-4  form-container" >
+                <p class="titleCrete" style="margin-left: 130px;margin-top: 5px;">Add a new Calculator</p>
+                    <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px;">
+                        
+                            <form #CreatEcu="ngForm" class="m-4">
+                                <!-- Scroller list -->
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill" class="example-full-width"
+                                        [style]="{'width': '300px'}">
+                                        <mat-label>Choose a Family</mat-label>
+                                        <mat-select name="family" [(ngModel)]="selectFamily" id="family" [disabled]="!isModificationAllowed" (ngModelChange)="onFamilySelected($event)"  required>
+                                            <mat-option *ngFor="let family of AllFamily"
+                                                [value]="family">{{family.nomfamille}}-{{family.descrAnglais}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+        
+                                <!-- Injection Type input -->
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill" class="example-full-width"
+                                        [style]="{'width': '300px'}">
+                                        <mat-label>Inj Type</mat-label>
+                                        <mat-select name="username" [(ngModel)]="ecu.typeInj"  [disabled]="!isModificationAllowed" [disabled]="!enable" id="">
+        
+                                            <mat-option *ngFor="let types of allecuTypes"
+                                                [value]="types">{{types}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+        
+                                <!-- ECU Name input -->
+                                <div class="mb-3">
+                                    <mat-form-field appearance="fill" class="example-full-width"
+                                        [style]="{'width': '300px'}">
+                                        <mat-label>ECU Name</mat-label>
+                                        <input matInput type="text" name="nomEcu" [disabled]="!isModificationAllowed" [(ngModel)]="ecu.nomEcu" required>
+                                    </mat-form-field>
+                                </div>
+        
+                                <!-- Submit button -->
+                              
+        
+                                <div class=" g-3  d-flex justify-content-center" >
+                                    <p-toast></p-toast>
+                                    <p-confirmPopup></p-confirmPopup>
+                                    <button (click)="confirm3($event)" type="button" class="btn btn-search"
+                                     
+                                        label="Update Dev" [disabled]="!isModificationAllowed">Create a new Validation</button>
+                                </div>
+                            </form>
+                        
+                    </div>
+            </div>
+            <div></div>
+        </div>
+
+
+    </mat-tab>
+    <mat-tab label="Adaptateur">
+        <div class="card d-flex justify-content-center">
+            <div style="margin-top: 20px;"></div>
+            <p-pickList  [source]="cablesByDev" [target]="Allcables" sourceHeader="Adaptateur with associated dev " (onMoveToSource)="onMoveToSource($event)" (onMoveToTarget)="onMoveToTarget($event)"
+                targetHeader="availabes Adaptateurs " [dragdrop]="true" [responsive]="true"
+                [sourceStyle]="{width:'5rm' ,height: '20rem' }" [targetStyle]="{width:'5rm', height: '20rem' }"
+                filterBy="nomVeh" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name"
+                breakpoint="1400px" class="custom-picklist" [disabled]="!isModificationAllowed">
+                <ng-template let-cablesByDev pTemplate="item">
+                    <div class="flex flex-wrap p-2 align-items-center gap-3">
+
+                        <div class="flex-1 flex flex-column gap-2">
+                            <span >{{ cablesByDev.name}}</span>
+
+                        </div>
+
+
+                    </div>
+                </ng-template>
+
+            </p-pickList>
+            <div style="margin-top: 20px;"></div>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+
+
+
+
+<p-dialog header="List of CDC" [(visible)]="visibleTable"
+    >
+    <p-table #dt [value]="cdc" [rows]="5" [paginator]="true"
+    [globalFilterFields]="['idEcu', 'nomEcu', 'typeInj', 'nomfamille']" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} CDC" [showCurrentPageReport]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="idCdc">
+                Id<p-sortIcon field="idCdc"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nomCdc">Name <p-sortIcon field="nomCdc"></p-sortIcon></th>
+            <th pSortableColumn="refCdc" style="min-width:10rem">Reference <p-sortIcon
+                    field="refCdc"></p-sortIcon></th>
+            <th pSortableColumn="indCdc">Index <p-sortIcon field="indCdc">Index</p-sortIcon></th>
+            <th pSortableColumn="sites.nomSite">Site <p-sortIcon field="sites.nomSite">Site</p-sortIcon></th>
+            <th pSortableColumn="signatureOk">Signature <p-sortIcon field="signatureOk">Signature</p-sortIcon></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th> <p-columnFilter type="text" field="idCdc" ></p-columnFilter></th>
+            <th> <p-columnFilter type="text" field="nomCdc" ></p-columnFilter></th>
+            <th> <p-columnFilter type="text" field="indCdc" ></p-columnFilter></th>
+            
+            <th> <p-columnFilter type="text" field="sites.nomSite" ></p-columnFilter></th>
+            <th> <p-columnFilter type="text" field="signatureOk" ></p-columnFilter></th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-allcdc>
+        <tr>
+            <td>{{allcdc.idCdc}}</td>
+            <td>{{allcdc.nomCdc}}</td>
+            <td>{{allcdc.refCdc}}</td>
+            <td>{{allcdc.indCdc}}</td>
+            <td>{{allcdc?.sites?.nomSite}}</td>
+            <td><p-tag [value]="allcdc?.signatureOk" [severity]="getSeverity(allcdc?.signatureOk)"></p-tag></td>
+
+            <td>
+                <button type="button" pButton pRipple icon="pi pi-plus"
+                    class="p-button-rounded p-button-success mr-2" (click)="selectProduct(allcdc)"></button>
+
+                
+            </td>
+            <td>
+                <button type="button" pButton pRipple icon="pi pi-code"
+                    class="p-button-rounded p-button-success mr-2"
+                    (click)="showDialogfonction(allcdc.idCdc)"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">In total there are {{ cdc ?
+            cdc.length : 0 }} CDC.</div>
+    </ng-template>
+</p-table>
+</p-dialog>
+
+
+
+<p-dialog header="Fonctions" [(visible)]="visible3"
+    [style]="{width: '50vw', 'box-shadow': '0px 2px 5px rgba(0, 0, 0, 0.3)'} ">
+    <ul>
+        <li *ngFor="let fonction of fonctionsByCdcId">{{fonction.nomFonction }}</li>
+    </ul>
+</p-dialog>

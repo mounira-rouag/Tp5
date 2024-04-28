@@ -1,0 +1,161 @@
+<section>
+
+    <div class=" card "  >
+        <p class="title"  style="margin-left: 15px;margin-top: 5px;">Users list</p>
+        <p-table #dt1 [value]="allUsers" dataKey="id" [rows]="10" [showCurrentPageReport]="true" styleClass="p-datatable-sm"
+            [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="['id' , 'user.username','user.firstname','user.lastname' ,'email','profile']"
+            [tableStyle]="{ 'min-width': '50rem', 'height': '10rem'}" selectionMode="single" [loading]="loading">
+
+            <ng-template pTemplate="caption">
+                <div class="flex" style="justify-content: flex-end;margin-right: 70px;">
+                    <button pButton pRipple label="New" icon="pi pi-plus" class="btn btn-search mr-2" routerLink="/signup"></button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="id">
+                      
+                            Id
+                       
+                    </th>
+                    <th pSortableColumn="username">
+                        <div >
+                            Username
+                        </div>
+                    </th>
+                    <th pSortableColumn="firstname">
+                       
+                            firstname
+                    
+                    </th>
+                    <th pSortableColumn="lastname">
+                       
+                            lastname
+                       
+                    </th>
+                    <th pSortableColumn="profile">
+                       
+                            Profile
+
+                       
+                    </th>
+                    <th  pSortableColumn="Email">
+                    
+                            Email
+
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-allUsers>
+                <tr>
+                    <td>
+                        {{ allUsers.id }}
+                    </td>
+                    <td>
+                        {{ allUsers.username }}
+                    </td>
+                    <td>
+                        {{ allUsers.firstname }}
+                    </td>
+                    <td>
+                        {{ allUsers.lastname }}
+                    </td>
+                    <td>
+                        {{ allUsers.profile }}
+                    </td>
+                    <td>
+                        {{ allUsers.email}}
+                    </td>
+
+                    <td>
+                        <div>
+                           
+                                <button type="button" class="btn btn-light"  style="background-color: #82c419; color: white;" (click)="showDialog(allUsers)" > <i class="pi pi-pencil" style="font-size: 1rem"></i></button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            </ng-template>
+
+        </p-table>
+        <p-dialog [(visible)]="visible" [style]="{width: '50vw', 'box-shadow': '0px 2px 5px rgba(0, 0, 0, 0.3)'} ">
+            <ng-template pTemplate="content">
+                <!-- Form for updating user -->
+                <h4 class="d-flex justify-content-center">Update User</h4>
+                <form #updateUserForm="ngForm" style="width: 100%;" novalidate>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="firstname">Firstname</label>
+                                <input type="text" name="firstname" [(ngModel)]="userToUpdate.firstname" placeholder="Firstname" class="form-control"  />
+                               
+                            </div>
+                           
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="lastname">Lastname</label>
+                                <input type="text" name="lastname" [(ngModel)]="userToUpdate.lastname" placeholder="Lastname" class="form-control"  />
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" [(ngModel)]="userToUpdate.username" placeholder="Username" class="form-control"  />
+                      
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" [(ngModel)]="userToUpdate.email" placeholder="Email" class="form-control"  />
+                       
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="roles">Roles</label>
+                                <select id="roles" name="roles" [(ngModel)]="userToUpdate.roles" class="form-control">
+                                    <option value="user">User</option>
+                                    <option value="s">Admin</option>
+                                    <option value="rc">Rc</option>
+                                    <option value="rc+">Rc+</option>
+                                    <option value="rspouvoir">RsPouvoir</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="siteid">Site</label>
+                                <select name="siteid" [(ngModel)]="userToUpdate.site" id="siteid" class="form-control">
+                                    <option value="1">Ardia</option>
+                                    <option value="2">Actia Do Brasil</option>
+                                    <option value="3">Actia Nordic</option>
+                                    <option value="4">Actia Automotive</option>
+                                    <option value="5">Actia CZ</option>
+                                    <option value="6">Invertix</option>
+                                    <option value="7">Actia Italia</option>
+                                    <option value="8">Actia China</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" (click)="editUser()" class="btn btn-search" [disabled]="!updateUserForm.valid">Update User</button>
+                    </div>
+                </form>
+                
+
+            </ng-template>
+        </p-dialog>
+    </div>
+</section>

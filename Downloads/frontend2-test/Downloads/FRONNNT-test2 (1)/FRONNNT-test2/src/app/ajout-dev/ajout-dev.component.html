@@ -1,0 +1,37 @@
+<mat-tab-group animationDuration="2000ms" color="accent" >
+   <mat-tab label="Developpment">
+      <app-creat-dev-details (dataEvent)="receivedataFromChild($event)" [receiveData]="receiveData" (validationsEvent)="receiveValidation($event)"
+         [fonctionsByCdc]="fonctionsByCdc"  ></app-creat-dev-details>
+
+
+     
+
+
+      <div class=" g-3"
+      style="border-bottom: 20px; ;margin-top: 20px;margin-left: 15px;margin-bottom: 15px;">
+         <p-toast></p-toast>
+         <p-confirmPopup></p-confirmPopup>
+         <button (click)="confirm1($event)" type="button" class="btn btn-search"
+            icon="pi pi-check"
+            label="Update Dev">CREATE</button>
+      </div>
+   </mat-tab>
+   <mat-tab label="Vehicules">
+      <app-creat-vehicules-details
+         (VehiculesList)="receiveVehiculesListFromChild($event)"></app-creat-vehicules-details>
+   </mat-tab>
+   <mat-tab label="CDC">
+      <app-creat-cdc-details (CdcEmit)="receiveCdcFromChild($event)"
+         (fonctionsByCdcChange)="receiveCdcfonctionsFromChild($event)"></app-creat-cdc-details>
+   </mat-tab>
+   <mat-tab label="Menu">
+      <app-create-menu-details (DataEmit)="receiveEcuFromChild($event)"></app-create-menu-details>
+   </mat-tab>
+   <mat-tab label="Adaptateur">
+      <app-create-adaptateur-details (cablesList)="receiveCablesListFromChild($event)"></app-create-adaptateur-details>
+   </mat-tab>
+
+
+
+
+</mat-tab-group>

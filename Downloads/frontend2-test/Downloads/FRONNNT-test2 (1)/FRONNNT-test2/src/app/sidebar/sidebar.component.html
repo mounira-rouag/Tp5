@@ -1,0 +1,223 @@
+<div >
+    <p-sidebar #sidebarRef [(visible)]="sidebarVisible" >
+        <ng-template pTemplate="headless">
+            <div class="flex flex-column h-full" >
+                <div class="flex align-items-center justify-content-between px-4 pt-3 flex-shrink-0">
+                    <span class="inline-flex align-items-center gap-2">
+                        <img src="assets/images/ACTIA_NEGATIF_RVB.png" alt="Logo" class="logo">
+                        
+                    </span>
+                    
+                </div>
+                <div class="overflow-y-auto">
+                    <ul class="list-none p-3 m-0">
+                        <li>
+                            
+                            <ul class="list-none p-0 m-0 overflow-hidden">
+                           
+                              
+                                <li>
+                                    <a
+                                        pRipple
+                                        pStyleClass="@next"
+                                        enterClass="hidden"
+                                        enterActiveClass="slidedown"
+                                        leaveToClass="hidden"
+                                        leaveActiveClass="slideup"
+                                        class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                                    >
+                                        <i class="pi pi-wrench mr-2"></i>
+                                        <span class="font-medium">Developoment Manegment </span>
+                                        <i class="pi pi-chevron-down ml-auto"></i>
+                                    </a>
+                                    <ul class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                                        <li>
+                                            <a
+                                                pRipple
+                                                pStyleClass="@next"
+                                                enterClass="hidden"
+                                                enterActiveClass="slidedown"
+                                                leaveToClass="hidden"
+                                                leaveActiveClass="slideup"
+                                                [routerLink]="['/gestion-dev']"
+                                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                                            >
+                                                <i class="pi pi-search-plus mr-2"></i>
+                                                <span class="font-medium">Dev Consulting</span>
+                                                
+                                            </a>
+                                           
+                                        </li>
+                                        <li *ngIf="isLoggedIn && showAdminBoard">
+                                            <a  [routerLink]="['/create-dev']" pRipple class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                                <i class="pi pi-plus mr-2"></i>
+                                                <span class="font-medium">Dev creation</span>
+                                            </a>
+                                        </li>
+                                        <li *ngIf="isLoggedIn && showAdminBoard">
+                                            <a pRipple class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                                <i class="pi pi-upload mr-2"></i>
+                                                <span class="font-medium">Import</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a
+                                        pRipple
+                                        pStyleClass="@next"
+                                        enterClass="hidden"
+                                        enterActiveClass="slidedown"
+                                        leaveToClass="hidden"
+                                        leaveActiveClass="slideup"
+                                        class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                                    >
+                                        <i class="pi pi-wrench mr-2"></i>
+                                        <span class="font-medium">Quality Manegment </span>
+                                        <i class="pi pi-chevron-down ml-auto"></i>
+                                    </a>
+                                    <ul class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                                        <li>
+                                            <a
+                                                pRipple
+                                                pStyleClass="@next"
+                                                enterClass="hidden"
+                                                enterActiveClass="slidedown"
+                                                leaveToClass="hidden"
+                                                leaveActiveClass="slideup"
+                                                [routerLink]="['/cdc-manegment']"
+                                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                                            >
+                                                <i class="pi pi-search-plus mr-2"></i>
+                                                <span class="font-medium">CDC manegment</span>
+                                                
+                                            </a>
+                                           
+                                        </li>
+                                        <li *ngIf="isLoggedIn && showAdminBoard">
+                                            <a  [routerLink]="['/create-dev']" pRipple class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                                <i class="pi pi-plus mr-2"></i>
+                                                <span class="font-medium">Dev creation</span>
+                                            </a>
+                                        </li>
+                                        <li *ngIf="isLoggedIn && showAdminBoard">
+                                            <a pRipple class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                                <i class="pi pi-upload mr-2"></i>
+                                                <span class="font-medium">Import</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li *ngIf="isLoggedIn && showAdminBoard">
+                                    <a
+                                        pRipple
+                                        pStyleClass="@next"
+                                        enterClass="hidden"
+                                        enterActiveClass="slidedown"
+                                        leaveToClass="hidden"
+                                        leaveActiveClass="slideup"
+                                        class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                                    >
+                                        <i class="pi pi-user mr-2"></i>
+                                        <span class="font-medium">User Manegment </span>
+                                        <i class="pi pi-chevron-down ml-auto"></i>
+                                    </a>
+                                    <ul class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
+                                        <li>
+                                            <a   [routerLink]="['/signup']"
+                                                pRipple
+                                                pStyleClass="@next"
+                                                enterClass="hidden"
+                                                enterActiveClass="slidedown"
+                                                leaveToClass="hidden"
+                                                leaveActiveClass="slideup"
+                                                [routerLink]="['/gestion-dev']"
+                                                class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                                            >
+                                                <i class="pi pi-user-plus mr-2"></i>
+                                                <span class="font-medium">Create User</span>
+                                                
+                                            </a>
+                                           
+                                        </li>
+                                        <li>
+                                            <a  [routerLink]="['/users-list']" pRipple class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                                <i class="pi pi-users mr-2"></i>
+                                                <span class="font-medium">List of Users </span>
+                                            </a>
+                                        </li>
+                                      
+                                    </ul>
+                                </li>
+                               
+                              
+                               
+                               
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="list-none p-3 m-0">
+                        <li>
+                            <div
+                                pRipple
+                                pStyleClass="@next"
+                                enterClass="hidden"
+                                enterActiveClass="slidedown"
+                                leaveToClass="hidden"
+                                leaveActiveClass="slideup"
+                                class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
+                            >
+                                <span class="font-medium">APPLICATION</span>
+                                <i class="pi pi-chevron-down"></i>
+                            </div>
+                            <ul class="list-none p-0 m-0 overflow-hidden">
+                              
+                               
+                                <li>
+                                    <a pRipple class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                                        <i class="pi pi-cog mr-2"></i>
+                                        <span class="font-medium">Settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <hr class="mb-3 mx-3 border-top-1 border-none surface-border" />
+                    <a pRipple class="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple">
+                       
+                        <span class="font-bold">{{username}}</span>
+                    </a>
+                </div>
+                
+                <ul class="list-none p-0 m-0 overflow-hidden">
+                    <li>
+                        <a  href="/change-password"
+                        pRipple class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple" (click)="signOut() " >
+                            <i class="pi pi-sign-out mr-2"></i>
+                            <span class="font-medium">Reset Password</span>
+                        </a>
+                    </li>         
+                               
+                    <li>
+                        <a 
+                        pRipple class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple" (click)="signOut() " >
+                            <i class="pi pi-sign-out mr-2"></i>
+                            <span class="font-medium">Log out</span>
+                        </a>
+                    </li>
+                                
+                   
+                </ul>
+            </div>
+        </ng-template>
+    </p-sidebar>
+    <p-button (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+    </div>
+
+
+   
+    
+
+  

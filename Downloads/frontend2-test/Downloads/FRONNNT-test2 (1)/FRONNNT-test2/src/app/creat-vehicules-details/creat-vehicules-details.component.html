@@ -1,0 +1,26 @@
+<div class="card d-flex justify-content-center" style="margin-top: 20px;">
+    <div style="margin-top: 20px;"></div>
+    <p-pickList [source]="VehiculesWithDev" (onMoveToSource)="onMoveToSource($event)" (onMoveToTarget)="onMoveToTarget($event)" [target]="AllVehicules" sourceHeader="Vehicules associated with dev "
+        targetHeader="Available Vehicules " [dragdrop]="true" [responsive]="true"
+        [sourceStyle]="{width:'5rm' ,height: '20rem' }" [targetStyle]="{width:'5rm', height: '20rem' }"
+        filterBy="nomVeh" sourceFilterPlaceholder="Search by name" targetFilterPlaceholder="Search by name"
+        breakpoint="1400px" class="custom-picklist">
+        <ng-template let-VehiculesWithDev pTemplate="item">
+            <div class="flex flex-wrap p-2 align-items-center gap-3">
+
+                <div class="flex-1 flex flex-column gap-2">
+                    <span >{{ VehiculesWithDev?.nomVeh }}</span>
+
+                </div>
+                <div class="flex-1 flex flex-column gap-2">
+                    <span >{{ VehiculesWithDev?.marque?.nomMarque }}</span>
+
+                </div>
+
+            </div>
+        </ng-template>
+
+
+    </p-pickList>
+    <div style="margin-top: 20px;"></div>
+</div>

@@ -1,0 +1,207 @@
+<div class="row" style="margin-top: 20px;">
+    <div class="col form-container ">
+        <form (ngSubmit)="sendData()" style="max-width: 600px; margin-top:17px ;margin-left: 50px;" novalidate
+            [ngStyle]="{backgroundColor: 'var(--highlight-bg)'}">
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Dev Name</mat-label>
+                        <input matInput type="text" id="devname" [(ngModel)]="receiveData.devname" name="devname" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Version</mat-label>
+                        <mat-select name="receiveData.maj" id="nomMaj" [(ngModel)]="selectedVersion" required
+                            (ngModelChange)="onVersionChange($event)">
+
+                            <mat-option *ngFor="let maj of majs" [value]="maj">{{maj.nomMaj}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Dll</mat-label>
+                        <input matInput type="text" id="dll" [(ngModel)]="receiveData.dll" name="dll" >
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Site</mat-label>
+                        <mat-select name="receiveData.user.site" [(ngModel)]="receiveData.site" id="" required>
+                            <mat-option placeholder="" value="">Site</mat-option>
+                            <mat-option *ngFor="let site of sites" [value]="site">{{site.nomSite}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Developer</mat-label>
+                        <mat-select name="username" [(ngModel)]="receiveData.user" id="username" required>
+
+                            <mat-option *ngFor="let User of allUsers" [value]="User">{{User.username}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Etat-Dev</mat-label>
+                        <mat-select name="etatdev" [(ngModel)]="receiveData.etatdev" id="etatdev" >
+
+                            <mat-option *ngFor="let etat of allEtatDev"
+                                [value]="etat">{{etat.nomEtatDev}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col">
+
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>bug</mat-label>
+                        <input matInput type="text" id="numbeg" name="numbeg" [(ngModel)]="receiveData.numBug">
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Comment</mat-label>
+                        <input matInput type="text" id="comment" name="devcomment" [(ngModel)]="receiveData.devComment">
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            
+        </form>
+    </div>
+
+
+    <div class=" col form-container1">
+        <div style="margin-top: 20px;"></div>
+        <p-pickList [source]="fonctionByDev" [target]="fonctionsByCdc" sourceHeader="Fonctions of the dev "
+            targetHeader="Available fonctions (in CDC)" [dragdrop]="true" [responsive]="true"
+            [sourceStyle]="{ height: '22rem',  width: '250px' }" [targetStyle]="{ height: '22rem' , width: '250px' }" breakpoint="1400px">
+            <ng-template let-fonctionsBydev pTemplate="item">
+                <div class="flex flex-wrap p-2 align-items-center gap-3">
+
+                    <div class="flex-1 flex flex-column gap-2">
+                        <span class="font-bold">{{ fonctionsBydev.descrAnglais }}</span>
+
+                    </div>
+
+                </div>
+            </ng-template>
+        </p-pickList>
+
+    </div>
+
+
+</div>
+<div class="row" style="margin-top: 20px;">
+    <div class="col form-container ">
+        <p class="title" style="margin-left: 15px;margin-top: 5px;">Validations list</p>
+        <p-table [value]="validations"     [tableStyle]="{ 'min-width': '15rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>State</th>
+                    <th>Version</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-validation>
+                <tr>
+                    <td>{{ validation.dateValid }}</td>
+                    <td>{{ validation.name }}</td>
+                    <td>{{ validation.etatValid }}</td>
+                    <td>{{ validation.versionName }}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger"
+                            (click)="DeleteValidation( validation.idValid)">Delete</button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+       
+    </div>
+    <div class=" col form-container1">
+        <p class="titleCrete" style="margin-left: 50px;margin-top: 5px;">Add new Validation</p>
+        <form (ngSubmit)="onSubmit()" style="max-width: 600px; margin: 30px 12px;margin-left: 50px;" novalidate
+            [ngStyle]="{backgroundColor: 'var(--highlight-bg)'}">
+            <div class="row g-3">
+             
+                <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="validationCreate.dateValid" name="dateValid">
+
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Type</mat-label>
+                        <mat-select name="typeValid" [(ngModel)]="validationCreate.typeValid" id="typeValid "
+                            (change)="onListTypeChange()">
+
+                            <mat-option value="GT">Test Unitaire</mat-option>
+                            <mat-option value="Véhicule">Test Integration</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>State</mat-label>
+                        <mat-select name="etatValid" [(ngModel)]="validationCreate.etatValid" id="">
+                            <mat-option placeholder="" value="">State</mat-option>
+                            <mat-option value="correct">Correct </mat-option>
+                            <mat-option value="Incorrect">Incorrect</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Sub Versions</mat-label>
+                        <mat-select name="selectedIdVer" [(ngModel)]="validationCreate.idVer" id="">
+                            <mat-option placeholder="" value="">Subversions</mat-option>
+                            <mat-option *ngFor="let availableSubversion of availableSubversions"
+                                [value]="availableSubversion.idVer">{{availableSubversion.nomVer}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+            <div class=" g-3" style="margin-left: 200px;margin-top: 50px;">
+                <p-toast></p-toast>
+                <p-confirmPopup></p-confirmPopup>
+                <button (click)="confirm2($event)" type="button" class="btn btn-search "
+                    icon="pi pi-check"
+                    label="Update Dev">CREATE</button>
+            </div>
+        </form>
+
+    </div>
+</div>
