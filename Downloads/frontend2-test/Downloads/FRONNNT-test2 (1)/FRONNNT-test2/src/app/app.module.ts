@@ -69,6 +69,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { CdcManegmentComponent } from './cdc-manegment/cdc-manegment.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ValidationsStatesComponent } from './validations-states/validations-states.component';
+import { EtatValidComponent } from './etat-valid/etat-valid.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +98,8 @@ import { ValidationsStatesComponent } from './validations-states/validations-sta
           DuplicateDevComponent,
           SidebarComponent,
           CdcManegmentComponent,
-          ValidationsStatesComponent
+          ValidationsStatesComponent,
+          EtatValidComponent
   ],
   imports: [
     BrowserModule,

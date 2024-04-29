@@ -187,12 +187,12 @@ export class CreatDevDetailsComponent {
 
 
   DeleteValidation(validationId: number): void {
-    if (this.dev && this.dev.validation) {
-      const validationIndex = this.dev.validation.findIndex(validation => validation.idValid === validationId);
+    if (this.dev && this.dev.validations) {
+      const validationIndex = this.dev.validations.findIndex(validation => validation.idValid === validationId);
       if (validationIndex !== -1) {
-        this.dev.validation.splice(validationIndex, 1);
+        this.dev.validations.splice(validationIndex, 1);
         console.log('Validation removed successfully from Dev object.');
-        console.log(this.dev.validation)
+        console.log(this.dev.validations)
       } else {
         console.warn('Validation with ID', validationId, 'not found in Dev');
       }
@@ -210,18 +210,18 @@ export class CreatDevDetailsComponent {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill out all the required fields.', life: 3000 });
       return;
     }
-    console.log(this.dev.validation)
+    console.log(this.dev.validations)
     this.validationService.createValidationwithnewDev(this.validationCreate)
       .subscribe(createdValidation => {
 
 
         this.visible2 = false;
 
-        this.dev.validation.push(createdValidation);
-        this.validations = this.dev.validation;
+        this.dev.validations.push(createdValidation);
+        this.validations = this.dev.validations;
         this.getMajByValidation();
         console.log("validations with dev are ", this.validations);
-
+        this.validationsEvent.emit(this.validations);
         console.log('Validation created successfully:', createdValidation);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Validation created successfully and added to the list.', life: 3000 });
 
@@ -287,7 +287,7 @@ export class CreatDevDetailsComponent {
 
   onSubmit() {
     console.log(this.dev);
-    this.dev.validation = this.validations;
+    this.dev.validations = this.validations;
     this.dev.fonctions = this.fonctionByDev;
     this.devService.registerDev(this.dev).subscribe(res => {
       console.log("dev added succesfully ", res);

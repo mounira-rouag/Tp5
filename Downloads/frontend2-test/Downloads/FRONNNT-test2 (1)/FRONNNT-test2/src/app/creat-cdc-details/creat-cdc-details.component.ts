@@ -80,10 +80,11 @@ export class CreatCdcDetailsComponent {
     });
     
   }
-  selectProduct(cdc = new CDC) {
+  selectProduct(cdc :any) {
     this.cdc = cdc;
     this.fonctionsByCdc=this.cdc.fonctions
     console.log("----new dev-----", this.cdc)
+    this.CdcEmit.emit(this.cdc);
     this.visibleTable=false;
   }
 

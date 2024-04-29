@@ -432,12 +432,15 @@ export class AddDevComponent {
     console.log(this.selectedIdVer)
     this.validationService.createValidation(this.validationCreate, this.idDev)
       .subscribe(createdValidation => {
-
+        console.log(createdValidation);
+        
+      //  this.dev.validation = []
 
         this.visible2 = false;
         this.isSuccessful = true;
-        this.dev.validation.push(createdValidation);
+      
         this.validations = this.dev.validation;
+        console.log("dev with validation",this.dev.validation);
         this.getValidationByDev()
 
         console.log('Validation created successfully:', createdValidation);
@@ -633,7 +636,7 @@ onMoveToTarget(event: any) {
     this.dev.menu=this.dev.menu
     this.dev.cdc=this.dev.cdc
 
-    console.log('test', this.dev.cdc);
+    console.log('test', this.dev);
     
     this.devService.updateDev(this.idDev, this.dev)
       .subscribe(response => {

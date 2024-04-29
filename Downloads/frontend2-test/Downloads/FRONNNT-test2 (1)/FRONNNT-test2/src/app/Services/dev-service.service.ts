@@ -136,4 +136,7 @@ const httpOptions = {
     deleteValidationFromDev(devId: number, validationId: number): Observable<any> {
       return this.http.delete<any>(`${environment.apiUrl}/${devId}/validations/${validationId}`);
     }
+    getDevByVersionEnCours(): Observable<any> {
+      return this.http.get<any[]>(`${environment.apiUrl}/dev/Version-En-Cours`, { responseType: 'json' });
+    }
   }

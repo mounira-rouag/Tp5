@@ -341,10 +341,10 @@
                         <div class="col">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label> Data Source</mat-label>
-                                <mat-select name="nomReverse" [(ngModel)]="dev.cdc.reverse.nomReverse" id="" [disabled]="!isModificationAllowed">
+                                <mat-select name="nomReverse" [(ngModel)]="dev.cdc.reverse.idReverse" id="" [disabled]="!isModificationAllowed">
 
                                     <mat-option *ngFor="let reverse of reverses"
-                                        [value]="reverse.nomReverse">{{reverse.nomReverse }}</mat-option>
+                                        [value]="reverse.idReverse">{{reverse.nomReverse }}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>

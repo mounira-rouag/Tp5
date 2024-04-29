@@ -105,14 +105,15 @@ export class AjoutDevComponent {
     this.dev.maj = this.receiveData.maj;
     this.dev.sites = this.receiveData.site;
     this.dev.user = this.receiveData.user;
-    this.dev.validation = this.receivedValidations;
+    this.dev.validations = this.receivedValidations;
     this.dev.maj = this.receiveData.maj;
     this.dev.etatdev = this.receiveData.etatdev;
     this.dev.menu = this.receivedMenu;
     this.dev.ecu = this.receivedEcu;
     this.dev.fonctions = this.receiveData.fonctions;
    
-  
+    console.log("9-----9",this.dev.validations , this.receivedValidations);
+    
 
     // Log received data for debugging
     console.log("receivevalidation ", this.receiveData);
